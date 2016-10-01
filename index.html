@@ -36,7 +36,9 @@
 			$scope.message = "Awaiting input from server...";			
 			ws.onopen = function(event) {
 				console.log("Connected");
-				//console.log(event);
+				setInterval(function() {
+                    ws.send('ping');
+                }, 54000)
 			};			
 			ws.onmessage = function (event) { 
 				console.log(event);
