@@ -38,16 +38,15 @@ wss.broadcast = function broadcast(data) {
 
 console.log("websocket server created")
 
-wss.on("connection", function(ws) {	
-    all_active_connections[id] = ws;     
-           
-	ws.on("close", function() {		
-	    delete all_active_connections[ws.id];	    
-	    console.log("connection closed");
-        console.log(all_active_connections);
+wss.on("connection", function(ws) {
+    console.log("client connected");	
+    console.log(ws);     
+    
+	ws.on("close", function() {			    	    
+	    console.log("connection closed");        
 	});
 
 	ws.on("error", function() {		
-	    delete all_active_connections[ws.id];	    	    
+	    	    	    
 	});
 });
