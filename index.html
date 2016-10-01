@@ -32,33 +32,31 @@
 		app.controller('mainCtrl', function($scope, $http, $rootScope) {
             var host = location.origin.replace(/^http/, 'ws')    
 			var ws = new WebSocket(host);			
-			$scope.groceries = [];
-			$scope.message = "Awaiting input from Pebble app...";
-			$scope.userCount = 0;
+			$scope.pills = [];
+			$scope.message = "Awaiting input from server...";			
 			ws.onopen = function(event) {
 				console.log("Connected");
 				//console.log(event);
-			};
-			$scope.testVar;
+			};			
 			ws.onmessage = function (event) { 
-				console.log(typeof JSON.parse(event.data));
-				$rootScope.$apply(function() {
-					if(typeof JSON.parse(event.data) == "number") {
-						$scope.userCount = event.data;
-					} else {
-						$scope.message = "Grocery list:";
-						$scope.groceries = [];
+				console.log(event);
+				// $rootScope.$apply(function() {
+				// 	if(typeof JSON.parse(event.data) == "number") {
+				// 		$scope.userCount = event.data;
+				// 	} else {
+				// 		$scope.message = "Grocery list:";
+				// 		$scope.groceries = [];
 						
-					    angular.forEach(JSON.parse(event.data), function(value, key) {
-							var listItem = {name: value}
-							$scope.addToList(listItem);
-						});	
-					}								
-				});								
-			}
-			$scope.addToList = function(item) {
-				$scope.groceries.push(item);
-			}
+				// 	    angular.forEach(JSON.parse(event.data), function(value, key) {
+				// 			var listItem = {name: value}
+				// 			$scope.addToList(listItem);
+				// 		});	
+				// 	}								
+				// });								
+			};
+			// $scope.addToList = function(item) {
+			// 	$scope.groceries.push(item);
+			// }
 		});
     </script>
 </body>

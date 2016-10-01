@@ -46,7 +46,29 @@ wss.on("connection", function(ws) {
 	    console.log("connection closed");        
 	});
 
-	ws.on("error", function() {		
-	    	    	    
+	ws.on("error", function(e) {		
+        console.log(e);
 	});
 });
+
+var pillA = {
+    'name': 'Pill A',
+    'weightMg': 50,
+    'color': 'red'
+};
+
+var pillB = {
+    'name': 'Pill B',
+    'weightMg': 30,
+    'color': 'blue'
+};
+
+var pillC = {
+    'name': 'Pill A',
+    'weightMg': 80,
+    'color': 'green'
+};
+
+var pills = {
+    pills: [pillA, pillB, pillC]
+};
