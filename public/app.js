@@ -1,14 +1,5 @@
 var app = angular.module('myAPP', ['ngRoute']);
 
-// app.run(function ($rootScope) {
-//     $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {
-//         var word = current.$$route.originalPath.slice(1);
-//         $rootScope.active = word;
-//         word = word.charAt(0).toUpperCase() + word.slice(1);        
-//         angular.element(document.querySelector('#nav-title')).text(word);
-//     });
-// });
-
 app.config(function($routeProvider) {
   $routeProvider
   .when('/dashboard', {
@@ -22,13 +13,29 @@ app.config(function($routeProvider) {
   .otherwise({redirectTo: '/dashboard'});
 });
 
-app.controller('DashboardController', function($scope) {
+app.controller('DashboardController', function($scope, $rootScope) {
   $scope.message = 'Hello from Dashbaord';
+  var host = location.origin.replace(/^http/, 'ws')    
+  var ws = new WebSocket(host);			
+  $scope.data = {};
+  $scope.message = "Awaiting input from server...";			
+  ws.onopen = function(event) {
+    console.log("Connected");
+    setInterval(function() {
+      ws.send('ping');
+    }, 24000);
+  };			
+  ws.onmessage = function (event) { 
+    console.log(event);    
+    $rootScope.$apply(function () {
+        $scope.data = angular.fromJson(event.data);
+    });
+  };  
 });
 
 app.controller('profileController', function($scope, $http) {
   $scope.message = 'Hello from profile';
-  $scope.user = {};  
+  $scope.user = sampleUser;
 });
 
 app.controller('navController', function($scope, $location) {
@@ -38,3 +45,24 @@ app.controller('navController', function($scope, $location) {
     $scope.testVar = $location.path();
 });
 
+app.run(function ($rootScope) {
+    $rootScope.$on('$routeChangeSuccess', function (e, current, pre) {        
+        var word = current.$$route.originalPath.slice(1);        
+        $rootScope.active = word;
+        word = word.charAt(0).toUpperCase() + word.slice(1);        
+        angular.element(document.querySelector('#nav-title')).text(word);
+    });
+});
+
+var sampleUser = {
+  "_id": "56c66be5a73e492741507272",
+  "address": {
+    "city": "Union",
+    "state": "Kentucky",
+    "street_name": "Lakeview Drive",
+    "street_number": "11028",
+    "zip": "41091"
+  },
+  "first_name": "Allison",
+  "last_name": "Williams"
+};

@@ -1,58 +1,28 @@
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card" height="auto" width ="350">
-                <div class="header">
-                    <h4 class="title">Loan Status: <h7 id="percent"><b>34.7%</b></h7></h4>
-                </div>
-                <div class="content">
-                <div class="col-md-12"> 
-
-                    <canvas id="canvas" class="center-block" width="260" height= "360"  position="absolute"></canvas>
-                </div>
-
-
-                <!--
-                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                -->
-
-
-                    <div id="loanpaidlabel" class="footer">
-                    <br>
-                        <h5 > $8,050 paid of $23,200</h5>
-
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> Keep up the good work!
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-2">            
         </div>
-
         <div class="col-md-8">
             <div class="card">
                 <div class="header">
-                    <h2 class="title">Previous Payments</h4>
-                    <p class="category">Amount of Money Paid Back per Month</p>
+                    <h2 class="title">Saturday, Oct 1 2016</h4>                    
                 </div>
-                
-                <div class="col-md-12"> 
-                    <canvas id="client" class="center-block" width="600" height="350"></canvas>
+                <div class="col-md-12" style="width:600px; height:350px">
+                    <div ng-repeat="pill in data.pills">
+                        <p>{{pill.name}}</p>
+                    </div>
                 </div>
-                    <div class="footer">
-                        </br>
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-history"></i> Last Payment was Wednesday, January 15th 2017
-                        </div>
+                <!--{{data.pills | json}}-->
+                <div class="footer">
+                    </br>
+                    <hr>
+                    <div class="stats">
+                        <i class="fa fa-history"></i> Lorem ipsum
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-                </div>
-            </div>
+        <div class="col-md-2">            
         </div>
     </div>
 </div>
