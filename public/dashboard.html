@@ -1,0 +1,131 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" height="auto" width ="350">
+                <div class="header">
+                    <h4 class="title">Loan Status: <h7 id="percent"><b>34.7%</b></h7></h4>
+                </div>
+                <div class="content">
+                <div class="col-md-12"> 
+
+                    <canvas id="canvas" class="center-block" width="260" height= "360"  position="absolute"></canvas>
+                </div>
+
+
+                <!--
+                <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                -->
+
+
+                    <div id="loanpaidlabel" class="footer">
+                    <br>
+                        <h5 > $8,050 paid of $23,200</h5>
+
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-clock-o"></i> Keep up the good work!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="header">
+                    <h2 class="title">Previous Payments</h4>
+                    <p class="category">Amount of Money Paid Back per Month</p>
+                </div>
+                
+                <div class="col-md-12"> 
+                    <canvas id="client" class="center-block" width="600" height="350"></canvas>
+                </div>
+                    <div class="footer">
+                        </br>
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-history"></i> Last Payment was Wednesday, January 15th 2017
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  Charts Plugin -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script src="assets/js/chartist.min.js"></script>
+<script>
+
+$(document).ready(function () {
+    $('#loanpaidlabel').fadeIn(1000);
+    $('#percent').fadeIn(2500);
+
+
+    var data = [
+        {
+          value: 33,
+          color:"#3F9F3F"
+        },
+        {
+          value : 66,
+          color : "#222"
+        }
+      ];
+
+      var options = {
+    segmentShowStroke: false,
+    animateRotate: true,
+    animateScale: false,
+    percentageInnerCutout: 30,
+    multiTooltipTemplate: "<%= value %>",
+    //tooltipTemplate: "<%= value %>%"
+}
+
+    var myPie = new Chart(document.getElementById("canvas").getContext("2d")).Doughnut(data,options);
+
+    var barData = {
+    labels: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', 'Jan'],
+    datasets: [
+        {
+            
+            fillColor: '#382765',
+            data: [600, 200, 500, 900, 50, 200, 200, 400, 500, 400, 800,300],
+
+
+        }
+        
+    ]
+    };
+
+    var ctx = document.getElementById("client").getContext("2d");
+    window.myLine = new Chart(ctx).Bar(barData, {
+        responsive: true,
+        showTooltips: true,
+        multiTooltipTemplate: "<%= data %>",
+    });
+
+});
+</script>
+
+<!--  Notifications Plugin    -->
+<!--<script src="assets/js/bootstrap-notify.js"></script>-->
+
+<!--  Google Maps Plugin    -->
+<!--<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>-->
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<!--<script src="assets/js/light-bootstrap-dashboard.js"></script>-->
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script src="assets/js/demo.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        demo.initChartist();        	
+    });
+</script>

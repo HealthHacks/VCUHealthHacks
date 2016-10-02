@@ -4,7 +4,7 @@ var express = require("express")
 var app = express()
 var port = process.env.PORT || 5000
 
-app.use(express.static(__dirname + "/"))
+app.use(express.static(__dirname + "/public"));
 
 
 app.get('/', function(req, res){
@@ -32,7 +32,7 @@ wss.broadcast = function broadcast(data) {
 	console.log(typeof data);
 	console.log(typeof data[0]);
 	wss.clients.forEach(function each(client) {		
-		client.send(JSON.stringify(data));
+		client.send(JSON.stringify(pills));
 	});
 };
 
