@@ -19,21 +19,23 @@ app.get('/pillsRemoved', function (req, res) {
 	var results = {};
 	var pillArray = [];
 	var listString = req.query.pills;
-	if(listString[listString.length -1] == ',') { //hacking the csv
-		listString = listString.substring(0, listString.length - 1);
-	}	 
-	var listArray = listString.split(',')		
-	for(var i = 0; i < listArray.length; i++) {		
-		var removedPill = listArray[i];				
-		var currentPill = pills.pills.filter(function(e) {
-			return e.name == removedPill;
-		})[0];
-		if(new Date().getHours() < currentPill.schedule) {
-			pillArray.push({name:currentPill.name, correct:false});
-		} else {
-			pillArray.push({name:currentPill.name, correct:true});
+	if(listString) {
+		if(listString[listString.length -1] == ',') { //hacking the csv
+			listString = listString.substring(0, listString.length - 1);
+		}	 
+		var listArray = listString.split(',')		
+		for(var i = 0; i < listArray.length; i++) {		
+			var removedPill = listArray[i];				
+			var currentPill = pills.pills.filter(function(e) {
+				return e.name == removedPill;
+			})[0];
+			if(new Date().getHours() < currentPill.schedule) {
+				pillArray.push({name:currentPill.name, correct:false});
+			} else {
+				pillArray.push({name:currentPill.name, correct:true});
+			}
 		}
-	}
+	}	
 	results.pills = pillArray;
 	wss.broadcast(results);
   	res.json(results);	
