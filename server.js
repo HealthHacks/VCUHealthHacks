@@ -26,9 +26,9 @@ app.get('/pillsRemoved', function (req, res) {
 			return e.name == removedPill;
 		})[0];
 		if(new Date().getHours() < currentPill.schedule) {
-			pillArray.push({'name':currentPill.name, 'correct':false});
+			pillArray.push({name:currentPill.name, correct:false});
 		} else {
-			pillArray.push({'name':currentPill.name, 'correct':true});
+			pillArray.push({name:currentPill.name, correct:true});
 		}
 	}
 	results.pills = pillArray;
