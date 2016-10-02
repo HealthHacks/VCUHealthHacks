@@ -75,7 +75,7 @@ var pillA = {
     'weightMg': 50,
     'color': '#cc4555',
 	'schedule': 8,
-	'time': '8:00 AM'
+	'time': '12:00 PM'
 };
 
 var pillB = {
@@ -83,15 +83,15 @@ var pillB = {
     'weightMg': 30,
     'color': '#cc9845',
 	'schedule': 20,
-	'time': '8:00 PM'
+	'time': '3:00 PM'
 };
 
 var pillC = {
     'name': 'PillC',
     'weightMg': 80,
     'color': '#4578cc',
-	'schedule': 12,
-	'time': '12:00 PM'
+	'schedule': 20,
+	'time': '7:00 PM'
 };
 
 var pills = {
