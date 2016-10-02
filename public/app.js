@@ -18,7 +18,7 @@ app.controller('DashboardController', function($scope, $rootScope, $http) {
   $http.get('/pillsInventory')
   .success(function (data) {
     $scope.pillsInventory = data.pills;
-    console.log($scope.pillsInventory);
+    // console.log($scope.pillsInventory);
   })
   .error(function (error) {
     console.log(error);

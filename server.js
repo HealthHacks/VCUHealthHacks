@@ -43,8 +43,8 @@ console.log("http server listening");
 
 var wss = new WebSocketServer({server: server})
 wss.broadcast = function broadcast(data) {
-	console.log(typeof data);
-	console.log(typeof data[0]);
+	// console.log(typeof data);
+	// console.log(typeof data[0]);
 	wss.clients.forEach(function each(client) {		
 		client.send(JSON.stringify(data));
 	});
@@ -53,8 +53,8 @@ wss.broadcast = function broadcast(data) {
 console.log("websocket server created");
 
 wss.on("connection", function(ws) {
-    console.log("client connected");	
-    console.log(ws);     
+    // console.log("client connected");	
+    // console.log(ws);     
     
 	ws.on("close", function() {			    	    
 	    console.log("connection closed");        
