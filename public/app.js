@@ -15,18 +15,17 @@ app.config(function($routeProvider) {
 
 app.controller('DashboardController', function($scope, $rootScope, $http) {
   $scope.message = 'Hello from Dashbaord';
-  $http.get('/pills')
+  $http.get('/pillsInventory')
   .success(function (data) {
-    $scope.pills = data.pills;
+    $scope.pillsInventory = data.pills;
   })
   .error(function (error) {
     console.log(error);
   });  
 
-  var host = location.origin.replace(/^http/, 'ws')    
-  var ws = new WebSocket(host);			
-  $scope.data = {};
-  $scope.message = "Awaiting input from server...";			
+  var host = location.origin.replace(/^http/, 'ws'); 
+  var ws = new WebSocket(host);
+  $scope.data = {};  			
   ws.onopen = function(event) {
     console.log("Connected");
     setInterval(function() {
@@ -34,7 +33,7 @@ app.controller('DashboardController', function($scope, $rootScope, $http) {
     }, 24000);
   };			
   ws.onmessage = function (event) { 
-    console.log(event);    
+    console.log(event);
     $rootScope.$apply(function () {
         $scope.data = angular.fromJson(event.data);
     });

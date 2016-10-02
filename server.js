@@ -11,19 +11,29 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/pills', function(req, res){
+app.get('/pillsInventory', function(req, res){
   res.json(pills);
 });
 
-app.get('/groceries', function (req, res) {	
-	var listString = req.query.list;
-	var listArray = listString.split(',')
-	var listObject = {}
-	for(var i = 0; i < listArray.length; i++) {
-		listObject[i] = listArray[i];
+app.get('/pillsRemoved', function (req, res) {
+	var results = {};
+	var pillArray = [];
+	var listString = req.query.pills;
+	var listArray = listString.split(',')		
+	for(var i = 0; i < listArray.length; i++) {		
+		var removedPill = listArray[i];				
+		var currentPill = pills.pills.filter(function(e) {
+			return e.name == removedPill;
+		})[0];
+		if(new Date().getHours() < currentPill.schedule) {
+			pillArray.push({'name':currentPill.name, 'correct':false});
+		} else {
+			pillArray.push({'name':currentPill.name, 'correct':true});
+		}
 	}
-	wss.broadcast(listObject);
-  	res.send(listObject); 	
+	results.pills = pillArray;
+	wss.broadcast(results);
+  	res.json(results);	
 });
 
 var server = http.createServer(app)
@@ -36,11 +46,11 @@ wss.broadcast = function broadcast(data) {
 	console.log(typeof data);
 	console.log(typeof data[0]);
 	wss.clients.forEach(function each(client) {		
-		client.send(JSON.stringify(pills));
+		client.send(JSON.stringify(data));
 	});
 };
 
-console.log("websocket server created")
+console.log("websocket server created");
 
 wss.on("connection", function(ws) {
     console.log("client connected");	
@@ -56,21 +66,24 @@ wss.on("connection", function(ws) {
 });
 
 var pillA = {
-    'name': 'Pill A',
+    'name': 'PillA',
     'weightMg': 50,
-    'color': '#cc4555'
+    'color': '#cc4555',
+	'schedule': 0
 };
 
 var pillB = {
-    'name': 'Pill B',
+    'name': 'PillB',
     'weightMg': 30,
-    'color': '#cc9845'
+    'color': '#cc9845',
+	'schedule': 20
 };
 
 var pillC = {
-    'name': 'Pill C',
+    'name': 'PillC',
     'weightMg': 80,
-    'color': '#4578cc'
+    'color': '#4578cc',
+	'schedule': 12
 };
 
 var pills = {
