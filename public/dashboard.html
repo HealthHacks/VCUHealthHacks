@@ -14,8 +14,10 @@
                                 <div class="circle" ng-style="{'background-color':'{{pill.color}}'}">                                    
                                 </div>
                                 <h3 style="text-align:center">{{pill.name}}</h3>
-                                <h3 ng-show="sensorData[pill.name] === true">correct</h3>
-                                <h3 ng-show="sensorData[pill.name] === false">incorrect</h3>                                                   
+                                <div style="">
+                                    <img style="height:100px;" ng-show="sensorData[pill.name] === true" src="Yes_check.svg" />
+                                    <img style="height:100px;" ng-show="sensorData[pill.name] === false" src="X.svg" />    
+                                </div>                                                                                   
                             </div>
                         </div>
                         <!--{{sensorData | json}}-->
@@ -25,7 +27,7 @@
                     </br>
                     <hr>
                     <div class="stats">
-                        <i class="fa fa-history"></i> Lorem ipsum
+                        <i class="fa fa-history"></i> Sample User
                     </div>
                 </div>
             </div>
