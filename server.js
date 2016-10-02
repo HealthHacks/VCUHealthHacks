@@ -11,6 +11,10 @@ app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/pills', function(req, res){
+  res.json(pills);
+});
+
 app.get('/groceries', function (req, res) {	
 	var listString = req.query.list;
 	var listArray = listString.split(',')
@@ -54,19 +58,19 @@ wss.on("connection", function(ws) {
 var pillA = {
     'name': 'Pill A',
     'weightMg': 50,
-    'color': 'red'
+    'color': '#cc4555'
 };
 
 var pillB = {
     'name': 'Pill B',
     'weightMg': 30,
-    'color': 'blue'
+    'color': '#cc9845'
 };
 
 var pillC = {
-    'name': 'Pill A',
+    'name': 'Pill C',
     'weightMg': 80,
-    'color': 'green'
+    'color': '#4578cc'
 };
 
 var pills = {

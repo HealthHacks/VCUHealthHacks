@@ -8,11 +8,16 @@
                     <h2 class="title">Saturday, Oct 1 2016</h4>                    
                 </div>
                 <div class="col-md-12" style="width:600px; height:350px">
-                    <div ng-repeat="pill in data.pills">
-                        <p>{{pill.name}}</p>
-                    </div>
-                </div>
-                <!--{{data.pills | json}}-->
+                    <div class="row">
+                        <div ng-repeat="pill in pills">
+                            <div class="col-md-4">
+                                <div class="circle" ng-style="{'background-color':'{{pill.color}}'}">                                    
+                                </div>
+                                <h3 style="text-align:center">{{pill.name}}</h3>                        
+                            </div>
+                        </div>              
+                    </div>                              
+                </div>                
                 <div class="footer">
                     </br>
                     <hr>

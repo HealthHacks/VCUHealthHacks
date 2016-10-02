@@ -13,8 +13,16 @@ app.config(function($routeProvider) {
   .otherwise({redirectTo: '/dashboard'});
 });
 
-app.controller('DashboardController', function($scope, $rootScope) {
+app.controller('DashboardController', function($scope, $rootScope, $http) {
   $scope.message = 'Hello from Dashbaord';
+  $http.get('/pills')
+  .success(function (data) {
+    $scope.pills = data.pills;
+  })
+  .error(function (error) {
+    console.log(error);
+  });  
+
   var host = location.origin.replace(/^http/, 'ws')    
   var ws = new WebSocket(host);			
   $scope.data = {};
