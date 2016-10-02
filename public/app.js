@@ -70,6 +70,16 @@ app.run(function ($rootScope) {
     });
 });
 
+var acc = document.getElementsByClassName("accordion");
+var i;
+
+for (i = 0; i < acc.length; i++) {
+    acc[i].onclick = function(){
+        this.classList.toggle("active");
+        this.nextElementSibling.classList.toggle("show");
+    }
+}
+
 var sampleUser = {
   "_id": "56c66be5a73e492741507272",
   "address": {
