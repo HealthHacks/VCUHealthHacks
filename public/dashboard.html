@@ -13,10 +13,10 @@
                             <div class="col-md-4">
                                 <div class="circle" ng-style="{'background-color':'{{pill.color}}'}">                                    
                                 </div>
-                                <h3 style="text-align:center">{{pill.name}}, {{pill.weightMg}} mg</h3>
+                                <h3 style="text-align:center">{{pill.name}}, {{pill.weightMg}} mg {{pill.time}}</h3>
                                 <div style="">
-                                    <img style="height:100px;" ng-show="sensorData[pill.name] === true" src="Yes_check.svg" />
-                                    <img style="height:100px;" ng-show="sensorData[pill.name] === false" src="X.svg" />    
+                                    <img style="height:75px;" ng-show="sensorData[pill.name] === true" src="Yes_check.svg" />
+                                    <img style="height:75px;" ng-show="sensorData[pill.name] === false" src="X.svg" />    
                                 </div>                                                                                   
                             </div>
                         </div>
