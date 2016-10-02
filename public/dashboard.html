@@ -13,11 +13,14 @@
                             <div class="col-md-4">
                                 <div class="circle" ng-style="{'background-color':'{{pill.color}}'}">                                    
                                 </div>
-                                <h3 style="text-align:center">{{pill.name}}</h3>                        
+                                <h3 style="text-align:center">{{pill.name}}</h3>
+                                <h3 ng-show="sensorData[pill.name] === true">correct</h3>
+                                <h3 ng-show="sensorData[pill.name] === false">incorrect</h3>                                                   
                             </div>
-                        </div>              
+                        </div>
+                        <!--{{sensorData | json}}-->
                     </div>                              
-                </div>                
+                </div>          
                 <div class="footer">
                     </br>
                     <hr>

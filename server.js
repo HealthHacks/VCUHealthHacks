@@ -69,7 +69,7 @@ var pillA = {
     'name': 'PillA',
     'weightMg': 50,
     'color': '#cc4555',
-	'schedule': 0
+	'schedule': 0	
 };
 
 var pillB = {

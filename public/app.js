@@ -18,6 +18,7 @@ app.controller('DashboardController', function($scope, $rootScope, $http) {
   $http.get('/pillsInventory')
   .success(function (data) {
     $scope.pillsInventory = data.pills;
+    console.log($scope.pillsInventory);
   })
   .error(function (error) {
     console.log(error);
@@ -25,7 +26,7 @@ app.controller('DashboardController', function($scope, $rootScope, $http) {
 
   var host = location.origin.replace(/^http/, 'ws'); 
   var ws = new WebSocket(host);
-  $scope.data = {};  			
+  $scope.sensorData = {};  			
   ws.onopen = function(event) {
     console.log("Connected");
     setInterval(function() {
@@ -33,9 +34,17 @@ app.controller('DashboardController', function($scope, $rootScope, $http) {
     }, 24000);
   };			
   ws.onmessage = function (event) { 
-    console.log(event);
+    //console.log(event);
+    // event.data = angular.fromJson(event.data);        
     $rootScope.$apply(function () {
-        $scope.data = angular.fromJson(event.data);
+        var parsedData = angular.fromJson(event.data);        
+        var remapped = {}
+        for(var i = 0; i < parsedData.pills.length; i++) {          
+          var currentPill = parsedData.pills[i];
+          var name = currentPill.name;          
+          remapped[name] = currentPill.correct                    
+        }
+        $scope.sensorData = remapped;
     });
   };  
 });
